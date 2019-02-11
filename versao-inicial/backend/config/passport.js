@@ -12,6 +12,7 @@ module.exports = app => {
     const strategy = new Strategy(params, (payload, done) => {
         app.db('users')
             .where({ id: payload.id })
+            .whereNull('deletedAt')
             .first()
             .then(user => done(null, user ? { ...payload } : false))
             .catch(err => done(err, false))
