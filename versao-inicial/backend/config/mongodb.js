@@ -1,5 +1,7 @@
+const { mongodb } = require('../.env')
+
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/knowledge_stats', { useNewUrlParser: true })
+mongoose.connect(mongodb.url, { useNewUrlParser: true })
     .catch(e => {
         const message = 'Erro! Não foi possível conectar com o MongoDB!'
         const { showWarning } = app.utils.logs
