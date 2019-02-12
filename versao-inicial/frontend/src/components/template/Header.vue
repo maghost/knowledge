@@ -24,12 +24,12 @@ export default {
     },
     computed: {
         icon() {
-            return "fa-angle-left"
+            return this.$store.state.isMenuVisible ? "fa-angle-left" : "fa-angle-down"
         }
     },
     methods: {
         toggleMenu() {
-            console.log('toggleMenu')
+            this.$store.commit('toggleMenu')
         }
     }
 }

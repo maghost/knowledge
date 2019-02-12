@@ -1,10 +1,13 @@
 <template>
-    <aside class="Menu"></aside>
+    <aside class="Menu" v-show="isMenuVisible"></aside>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-    name: 'Menu'
+    name: 'Menu',
+    computed: mapState(['isMenuVisible'])
 }
 </script>
 
