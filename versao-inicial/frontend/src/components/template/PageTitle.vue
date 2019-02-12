@@ -1,7 +1,7 @@
 <template>
     <div class="PageTitle">
-        <h1 class="PageTitle__title"><i v-if="icon" :class="icon"></i> {{ main }}</h1>
-        <h2 class="PageTitle__subtitle">{{ sub }}</h2>
+        <h1 class="PageTitle__main"><i v-if="icon" :class="icon"></i> {{ main }}</h1>
+        <h2 class="PageTitle__sub">{{ sub }}</h2>
         <hr>
     </div>
 </template>
@@ -26,11 +26,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .PageTitle__title {
+    .PageTitle__main {
         margin: 0;
     }
 
-    .PageTitle__subtitle {
+    .PageTitle__sub {
         color: #777777;
         margin-top: 5px;
         font-style: 1.3rem;
