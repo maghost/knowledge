@@ -1,6 +1,9 @@
 <template>
     <div id="app" :class="[ 'app', { 'app--hideMenu' : !isMenuVisible } ]">
-        <Header title="Cod3r - Base de Conhecimento" :hideToggle="false" />
+        <Header
+            title="Cod3r - Base de Conhecimento"
+            :hideToggle="false"
+            :hideUserDropdown="false" />
         <Menu />
         <Content />
         <Footer />

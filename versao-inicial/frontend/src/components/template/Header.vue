@@ -6,18 +6,26 @@
         <h1 class="Header__title">
             {{ title }}
         </h1>
+        <UserDropdown v-if="!hideUserDropdown" />
     </header>
 </template>
 
 <script>
+import UserDropdown from '@/components/template/UserDropdown'
+
 export default {
     name: 'Header',
+    components: { UserDropdown },
     props: {
         title: {
             type: String,
             required: true
         },
         hideToggle: {
+            type: Boolean,
+            required: true
+        },
+        hideUserDropdown: {
             type: Boolean,
             required: true
         }
@@ -64,12 +72,12 @@ export default {
         justify-self: flex-start;
         justify-content: center;
         align-items: center;
-        color: #ffffff;
+        color: #ffffff !important;
         text-decoration: none;
         cursor: pointer;
 
         &:hover {
-            background-color: rgba(0,0,0,0.2);
+            background-color: rgba(0, 0, 0, 0.2);
         }
     }
 </style>
