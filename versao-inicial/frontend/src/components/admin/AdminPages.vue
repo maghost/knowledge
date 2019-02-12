@@ -12,7 +12,7 @@ import PageTitle from '@/components/template/PageTitle'
 
 export default {
     name: 'AdminPages',
-    compontents: PageTitle
+    components: { PageTitle }
 }
 </script>
 
