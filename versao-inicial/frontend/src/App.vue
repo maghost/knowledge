@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="app">
-        <Header />
+        <Header title="Cod3r - Base de Conhecimento" :hideToggle="false" />
         <Menu />
         <Content />
         <Footer />
@@ -32,7 +32,9 @@ export default {
     body {
         margin: 0;
     }
+</style>
 
+<style lang="scss" scoped>
     .app {
         -webkit-font-smoothing: antialised;
         -moz-osx-font-smoothing: grayscale;

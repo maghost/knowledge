@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
     .Content {
         grid-area: content;
         background-color: #efefef;

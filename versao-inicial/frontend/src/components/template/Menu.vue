@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
     .Menu {
         grid-area: menu;
         display: flex;

@@ -8,7 +8,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
     .Footer {
         grid-area: footer;
         display: flex;
