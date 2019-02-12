@@ -1,7 +1,7 @@
 const schedule = require('node-schedule')
 
 module.exports = app => {
-    schedule.scheduleJob('*/1 * * * *', async function () {
+    schedule.scheduleJob('*/20 * * * * *', async function () {
         const { showLog } = app.utils.logs
 
         const usersCount = await app.db('users').whereNull('deletedAt').count('id').first()
