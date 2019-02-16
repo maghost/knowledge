@@ -39,7 +39,7 @@ export default {
         PageTitle,
         Stat
     },
-    data() {
+    data: function() {
         return {
             stat: {}
         }
