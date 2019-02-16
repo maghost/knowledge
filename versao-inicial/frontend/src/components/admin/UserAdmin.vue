@@ -94,8 +94,9 @@ export default {
     },
     methods: {
         loadUsers() {
-            axios.get(`${baseApiUrl}/users`)
-                .then(res => this.users = res.data)
+            const url = `${baseApiUrl}/users`
+
+            axios.get(url).then(res => this.users = res.data)
         },
         loadUser(user, mode = 'save') {
             this.mode = mode
@@ -109,7 +110,9 @@ export default {
         save() {
             const method = this.user.id ? 'put' : 'post'
             const id = this.user.id ? `/${this.user.id}` : ''
-            axios[method](`${baseApiUrl}/users${id}`, this.user)
+            const url = `${baseApiUrl}/users${id}`
+
+            axios[method](url, this.user)
                 .then(() => {
                     this.$toasted.global.success()
                     this.reset()
@@ -118,7 +121,9 @@ export default {
         },
         remove() {
             const id = this.user.id
-            axios.delete(`${baseApiUrl}/users/${id}`)
+            const url = `${baseApiUrl}/users/${id}`
+
+            axios.delete(url)
                 .then(() => {
                     this.$toasted.global.success()
                     this.reset()

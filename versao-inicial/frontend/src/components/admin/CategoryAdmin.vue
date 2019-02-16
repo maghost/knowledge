@@ -65,7 +65,9 @@ export default {
     },
     methods: {
         loadCategories() {
-            axios.get(`${baseApiUrl}/categories`)
+            const url = `${baseApiUrl}/categories`
+
+            axios.get(url)
                 .then(res => {
                     this.categories = res.data.map(category => {
                         return { ...category, value: category.id, text: category.path }
@@ -84,7 +86,9 @@ export default {
         save() {
             const method = this.category.id ? 'put' : 'post'
             const id = this.category.id ? `/${this.category.id}` : ''
-            axios[method](`${baseApiUrl}/categories${id}`, this.category)
+            const url = `${baseApiUrl}/categories${id}`
+
+            axios[method](url, this.category)
                 .then(() => {
                     this.$toasted.global.success()
                     this.reset()
@@ -93,7 +97,9 @@ export default {
         },
         remove() {
             const id = this.category.id
-            axios.delete(`${baseApiUrl}/categories/${id}`)
+            const url = `${baseApiUrl}/categories/${id}`
+
+            axios.delete(url)
                 .then(() => {
                     this.$toasted.global.success()
                     this.reset()
