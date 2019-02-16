@@ -15,7 +15,3 @@ export default {
     components: { PageTitle }
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
