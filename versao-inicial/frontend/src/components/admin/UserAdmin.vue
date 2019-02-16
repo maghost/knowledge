@@ -7,6 +7,7 @@
                     <b-form-group label="Nome:" label-for="user-name">
                         <b-form-input id="user-name" type="text"
                             v-model="user.name" required
+                            :readonly="mode === 'remove'"
                             placeholder="Informe o nome do usuário" />
                     </b-form-group>
                 </b-col>
@@ -14,12 +15,13 @@
                     <b-form-group label="E-mail:" label-for="user-email">
                         <b-form-input id="user-email" type="email"
                             v-model="user.email" required
+                            :readonly="mode === 'remove'"
                             placeholder="Informe o e-mail do usuário" />
                     </b-form-group>
                 </b-col>
             </b-row>
-            <b-row>
-                <b-col>
+            <b-row v-show="mode === 'save'">
+                <b-col sm="12">
                     <b-form-checkbox
                         id="user-admin"
                         v-model="user.admin"
@@ -27,8 +29,6 @@
                         Administrador?
                     </b-form-checkbox>
                 </b-col>
-            </b-row>
-            <b-row>
                 <b-col md="6" sm="12">
                     <b-form-group label="Senha:" label-for="user-password">
                         <b-form-input id="user-password" type="password"
@@ -45,7 +45,7 @@
                 </b-col>
             </b-row>
             <b-row>
-                <b-col>
+                <b-col sm="12">
                     <b-button variant="primary" v-if="mode === 'save'"
                         @click="save">Salvar</b-button>
                     <b-button variant="danger" v-if="mode === 'remove'"
@@ -55,7 +55,16 @@
             </b-row>
         </b-form>
         <hr>
-        <b-table hover striped :items="users" :fields="fields"></b-table>
+        <b-table hover striped :items="users" :fields="fields">
+            <template slot="actions" slot-scope="data">
+                <b-button variant="warning" @click="loadUser(data.item)" class="mr-2">
+                    <i class="fa fa-pencil"></i>
+                </b-button>
+                <b-button variant="danger" @click="loadUser(data.item, 'remove')">
+                    <i class="fa fa-trash"></i>
+                </b-button>
+            </template>
+        </b-table>
     </div>
 </template>
 
@@ -88,6 +97,10 @@ export default {
             axios.get(`${baseApiUrl}/users`)
                 .then(res => this.users = res.data)
         },
+        loadUser(user, mode = 'save') {
+            this.mode = mode
+            this.user = { ...user }
+        },
         reset() {
             this.mode = 'save'
             this.user = {}
@@ -96,7 +109,7 @@ export default {
         save() {
             const method = this.user.id ? 'put' : 'post'
             const id = this.user.id ? `/${this.user.id}` : ''
-            axios[method](`${baseApiUrl}/users/${id}`, this.user)
+            axios[method](`${baseApiUrl}/users${id}`, this.user)
                 .then(() => {
                     this.$toasted.global.success()
                     this.reset()

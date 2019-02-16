@@ -19,10 +19,15 @@ module.exports = app => {
         try {
             existsOrError(user.name, 'Nome não informado')
             existsOrError(user.email, 'E-mail não informado')
-            existsOrError(user.password, 'Senha não informada')
-            existsOrError(user.confirmPassword, 'Confirmação de Senha inválida')
-            equalsOrError(user.password, user.confirmPassword,
-                'Senhas não conferem')
+
+            // No update não será obrigatório enviar a senha,
+            // apenas se quiser atualiza-lá
+            if (!user.id) {
+                existsOrError(user.password, 'Senha não informada')
+                existsOrError(user.confirmPassword, 'Confirmação de senha inválida')
+                equalsOrError(user.password, user.confirmPassword,
+                    'Senhas não conferem')
+            }
 
             const userFromDB = await app.db('users')
                 .where({ email: user.email }).first()
@@ -33,8 +38,10 @@ module.exports = app => {
             return res.status(400).send(message)
         }
 
-        user.password = encryptPassword(user.password)
-        delete user.confirmPassword
+        if (user.password) {
+            user.password = encryptPassword(user.password)
+            delete user.confirmPassword
+        }
 
         if (user.id) {
             app.db('users')
