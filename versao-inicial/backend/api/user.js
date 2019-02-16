@@ -9,7 +9,14 @@ module.exports = app => {
     }
 
     const save = async (req, res) => {
-        const user = { ...req.body }
+        const user = {
+            id: req.body.id,
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            admin: req.body.admin
+        }
+
         if (req.params.id) user.id = req.params.id
 
         if (!req.originalUrl.startsWith('/users') || !req.user || !req.user.admin) {

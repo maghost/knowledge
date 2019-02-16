@@ -4,7 +4,16 @@ module.exports = app => {
     const { existsOrError } = app.utils.validation
 
     const save = (req, res) => {
-        const article = { ...req.body }
+        const article = {
+            id: req.body.id,
+            name: req.body.name,
+            description: req.body.description,
+            imageUrl: req.body.imageUrl,
+            categoryId: req.body.categoryId,
+            userId: req.body.userId,
+            content: req.body.content
+        }
+
         if (req.params.id) article.id = req.params.id
 
         try {
@@ -21,12 +30,12 @@ module.exports = app => {
             app.db('articles')
                 .update(article)
                 .where({ id: article.id })
-                .then(_ => res.status(204))
+                .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         } else {
             app.db('articles')
                 .insert(article)
-                .then(_ => res.status(204))
+                .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         }
     }
