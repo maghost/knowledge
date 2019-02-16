@@ -1,8 +1,8 @@
 import Vue from 'vue'
 
-const baseApiUrl = 'http://localhost:3000'
+export const baseApiUrl = 'http://localhost:3000'
 
-function showError(e) {
+export function showError(e) {
     if (e && e.response && e.response.data) {
         Vue.toasted.global.error({ msg: e.response.data })
     } else if (typeof e === 'string') {
@@ -11,5 +11,3 @@ function showError(e) {
         Vue.toasted.global.error()
     }
 }
-
-export default { baseApiUrl, showError }
