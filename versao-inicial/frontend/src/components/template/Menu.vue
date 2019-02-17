@@ -34,11 +34,20 @@ export default {
             }
         }
     },
+    mounted() {
+        this.$refs.tree.$on('node:selected', this.onNodeSelect)
+    },
     methods: {
         getTreeData() {
             const url = `${baseApiUrl}/categories/tree`
 
             return axios.get(url).then(res => res.data)
+        },
+        onNodeSelect(node) {
+            this.$router.push({
+                name: 'articleList',
+                params: { id: node.id }
+            })
         }
     }
 }

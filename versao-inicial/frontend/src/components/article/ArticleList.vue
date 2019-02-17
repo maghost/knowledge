@@ -39,6 +39,15 @@ export default {
             loadMore: true
         }
     },
+    watch: {
+        $route() {
+            // Resetar data
+            Object.assign(this.$data, this.$options.data())
+
+            this.getCategory()
+            this.getArticles()
+        }
+    },
     mounted() {
         this.getCategory()
         this.getArticles()
