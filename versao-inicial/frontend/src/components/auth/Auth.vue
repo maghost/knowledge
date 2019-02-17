@@ -11,7 +11,7 @@
                     <input @keyup.enter="signup" v-model="user.name" type="text" name="name" placeholder="Nome">
                     <input @keyup.enter="signup" v-model="user.email" type="email" name="email" placeholder="E-mail">
                     <input @keyup.enter="signup" v-model="user.password" type="password" name="password" placeholder="Senha">
-                    <input @keyup.enter="signup" v-model="user.confirmPassword" type="password" placeholder="Confirme a senha">
+                    <input @keyup.enter="signup" v-model="user.confirmPassword" type="password" name="confirm-password" placeholder="Confirme a senha">
 
                     <button @click="signup">Registrar</button>
 
@@ -65,7 +65,7 @@ export default {
             const url = `${baseApiUrl}/signup`
 
             axios.post(url, this.user)
-                .then(res => {
+                .then(() => {
                     this.$toasted.global.success()
                     this.user = {}
                     this.isSignup = false
