@@ -1,5 +1,7 @@
 <template>
-    <footer class="Footer"></footer>
+    <footer class="Footer">
+        <span>Copyright <strong>Maghøst</strong> &copy; 2019</span>
+    </footer>
 </template>
 
 <script>
