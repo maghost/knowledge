@@ -14,6 +14,7 @@ module.exports = app => {
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
+            confirmPassword: req.body.confirmPassword,
             admin: req.body.admin
         }
 
