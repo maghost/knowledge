@@ -23,7 +23,7 @@ export default new Vuex.Store({
                 state.isMenuVisible = isVisible
             }
         },
-        setuser(state, user) {
+        setUser(state, user) {
             state.user = user
 
             if (user) {

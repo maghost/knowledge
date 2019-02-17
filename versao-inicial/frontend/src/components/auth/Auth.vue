@@ -5,20 +5,32 @@
                 <img src="@/assets/logo.png" width="200" alt="Logo">
                 <hr>
 
-                <div class="Auth__title">{{ showSignup ? 'Cadastro' : 'Login' }}</div>
+                <template v-if="isSignup">
+                    <div class="Auth__title">Cadastro</div>
 
-                <input v-if="showSignup" v-model="user.name" type="text" name="name" placeholder="Nome">
-                <input v-model="user.email" type="email" name="email" placeholder="E-mail">
-                <input v-model="user.password" type="password" name="password" placeholder="Senha">
-                <input v-if="showSignup" v-model="user.confirmPassword" type="password" placeholder="Confirme a senha">
+                    <input @keyup.enter="signup" v-model="user.name" type="text" name="name" placeholder="Nome">
+                    <input @keyup.enter="signup" v-model="user.email" type="email" name="email" placeholder="E-mail">
+                    <input @keyup.enter="signup" v-model="user.password" type="password" name="password" placeholder="Senha">
+                    <input @keyup.enter="signup" v-model="user.confirmPassword" type="password" placeholder="Confirme a senha">
 
-                <button v-if="showSignup" @click="signup">Registrar</button>
-                <button v-else @click="signin">Entrar</button>
+                    <button @click="signup">Registrar</button>
 
-                <a href @click.prevent="showSignup = !showSignup">
-                    <span v-if="showSignup">Já tem cadastro? Acesse o login</span>
-                    <span v-else>Não tem cadastro? Registre-se aqui!</span>
-                </a>
+                    <a href @click.prevent="isSignup = false">
+                        <span>Já tem cadastro? Acesse o login</span>
+                    </a>
+                </template>
+                <template v-else>
+                    <div class="Auth__title">Login</div>
+
+                    <input @keyup.enter="signin" v-model="user.email" type="email" name="email" placeholder="E-mail">
+                    <input @keyup.enter="signin" v-model="user.password" type="password" name="password" placeholder="Senha">
+
+                    <button @click="signin">Entrar</button>
+
+                    <a href @click.prevent="isSignup = true">
+                        <span>Não tem cadastro? Registre-se aqui!</span>
+                    </a>
+                </template>
             </div>
         </div>
     </div>
@@ -32,7 +44,7 @@ export default {
     name: 'Auth',
     data: function() {
         return {
-            showSignup: false,
+            isSignup: false,
             user: {}
         }
     },
@@ -56,7 +68,7 @@ export default {
                 .then(res => {
                     this.$toasted.global.success()
                     this.user = {}
-                    this.showSignup = false
+                    this.isSignup = false
                 })
                 .catch(showError)
         }
@@ -110,6 +122,7 @@ export default {
 
         a {
             margin-top: 35px;
+            text-decoration: none;
         }
 
         hr {
