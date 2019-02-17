@@ -1,18 +1,17 @@
 <template>
-    <div class="ArticlesByCategory">
+    <div class="ArticleList" v-if="category">
         <page-title
-            v-if="category.name"
             :main="category.name"
             icon="fa fa-folder-o"
             sub="Categoria" />
 
-        <ul class="ArticleByCategory__list">
+        <ul class="ArticleList__list">
             <li v-for="article in articles" :key="article.id">
-                {{ article.name }}
+                <article-item :article="article" />
             </li>
         </ul>
 
-        <div class="ArticleByCategory__loadMore">
+        <div class="ArticleList__loadMore">
             <button v-if="loadMore"
                 class="btn btn-lg btn-outline-primary"
                 @click="getArticles">Carregar mais artigos</button>
@@ -24,33 +23,36 @@
 import { baseApiUrl } from '@/global'
 import axios from 'axios'
 import PageTitle from '@/components/template/PageTitle'
+import ArticleItem from '@/components/article/ArticleItem'
 
 export default {
-    name: 'ArticlesByCategory',
+    name: 'ArticleList',
     components: {
-        PageTitle
+        PageTitle,
+        ArticleItem
     },
     data: function() {
         return {
-            category: {},
+            category: null,
             articles: [],
             page: 1,
             loadMore: true
         }
     },
     mounted() {
-        this.category.id = this.$route.params.id
         this.getCategory()
         this.getArticles()
     },
     methods: {
         getCategory() {
-            const url = `${baseApiUrl}/categories/${this.category.id}`
+            const categoryId = this.$route.params.id
+            const url = `${baseApiUrl}/categories/${categoryId}`
 
             axios(url).then(res => this.category = res.data)
         },
         getArticles() {
-            const url = `${baseApiUrl}/categories/${this.category.id}/articles?page=${this.page}`
+            const categoryId = this.$route.params.id
+            const url = `${baseApiUrl}/categories/${categoryId}/articles?page=${this.page}`
 
             axios(url).then(res => {
                 this.articles = this.articles.concat(res.data)
@@ -66,16 +68,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .ArticleByCategory__list {
+    .ArticleList__list {
         list-style-type: none;
         padding: 0;
     }
 
-    .ArticleByCategory__loadMore {
+    .ArticleList__loadMore {
         display: flex;
         flex-direction: column;
         align-items: center;
         margin-top: 25px;
     }
 </style>
-
