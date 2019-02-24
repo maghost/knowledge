@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import 'highlightjs/styles/dracula.css'
+import hljs from 'highlightjs/highlight.pack.js'
 import { baseApiUrl } from '@/global'
 import axios from 'axios'
 import PageTitle from '@/components/template/PageTitle'
@@ -27,6 +29,11 @@ export default {
     },
     mounted() {
         this.getArticle()
+    },
+    updated() {
+        document.querySelectorAll('.ArticleDetail__content pre.ql-syntax').forEach(el => {
+            hljs.highlightBlock(el)
+        })
     },
     methods: {
         getArticle() {
