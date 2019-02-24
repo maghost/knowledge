@@ -1,9 +1,9 @@
 <template>
-    <div class="ArticleItem">
+    <div class="ArticleListItem">
         <router-link
             :to="{ name: 'articleDetail', params: { id: article.id } }"
-            class="ArticleItem__link">
-            <div class="ArticleItem__image d-none d-sm-block">
+            class="ArticleListItem__link">
+            <div class="ArticleListItem__image d-none d-sm-block">
                 <img v-if="article.imageUrl"
                     :src="article.imageUrl"
                     alt="Article">
@@ -12,10 +12,10 @@
                     alt="Article">
             </div>
 
-            <div class="ArticleItem__info">
-                <h2 class="ArticleItem__title">{{ article.name }}</h2>
-                <p class="ArticleItem__description">{{ article.description }}</p>
-                <span class="ArticleItem__author">
+            <div class="ArticleListItem__info">
+                <h2 class="ArticleListItem__title">{{ article.name }}</h2>
+                <p class="ArticleListItem__description">{{ article.description }}</p>
+                <span class="ArticleListItem__author">
                     <strong>Autor:</strong> {{ article.author }}
                 </span>
             </div>
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: 'ArticleItem',
+    name: 'ArticleListItem',
     props: {
         article: {
             type: Object,
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .ArticleItem {
+    .ArticleListItem {
         border-radius: 8px;
         margin-bottom: 20px;
         background-color: #fff;
@@ -45,20 +45,20 @@ export default {
         box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
     }
 
-    .ArticleItem__link {
+    .ArticleListItem__link {
         display: flex;
         align-items: flex-start;
         text-decoration: none;
         color: #000;
     }
 
-    .ArticleItem__info {
+    .ArticleListItem__info {
         display: flex;
         flex-direction: column;
         align-self: stretch;
     }
 
-    .ArticleItem__image {
+    .ArticleListItem__image {
         padding-right: 20px;
         margin-right: 20px;
         border-right: 1px solid #aaaaaa;
@@ -69,11 +69,11 @@ export default {
         }
     }
 
-    .ArticleItem__title {
+    .ArticleListItem__title {
         font-size: 1.5rem;
     }
 
-    .ArticleItem__description {
+    .ArticleListItem__description {
         flex: 1;
         color: #555555;
         font-style: 1.1rem;

@@ -7,7 +7,7 @@
 
         <ul class="ArticleList__list">
             <li v-for="article in articles" :key="article.id">
-                <article-item :article="article" />
+                <article-list-item :article="article" />
             </li>
         </ul>
 
@@ -23,13 +23,13 @@
 import { baseApiUrl } from '@/global'
 import axios from 'axios'
 import PageTitle from '@/components/template/PageTitle'
-import ArticleItem from '@/components/article/ArticleItem'
+import ArticleListItem from '@/components/article/ArticleListItem'
 
 export default {
     name: 'ArticleList',
     components: {
         PageTitle,
-        ArticleItem
+        ArticleListItem
     },
     data: function() {
         return {
