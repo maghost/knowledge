@@ -13,7 +13,10 @@ export default {
 <style lang="scss" scoped>
     .Loading {
         grid-area: content;
-        background-color: #efefef;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
         padding: 20px;
     }
 </style>

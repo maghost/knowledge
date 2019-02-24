@@ -14,9 +14,9 @@ export default {
     .Footer {
         grid-area: footer;
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: center;
-        padding-right: 10px;
+        padding: 0 10px;
         background: #ddd;
         color: #333;
     }
